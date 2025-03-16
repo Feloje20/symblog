@@ -1,0 +1,41 @@
+{% extends "layout.twig" %}
+
+{% block nav %}
+<nav>
+    <ul class="navigation">
+        <li>Bienvenido {{ profile }}</li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/register">Register</a></li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Iniciar sesión</h1>
+    
+    {% if error is not null %}
+        <div class="blogger-notice" style="background: #FFBABA; color: #D8000C; border-color: #D8000C;">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form class="blogger" action="/login" method="post">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <input type="submit" value="Iniciar sesión">
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block sidebar %}
+    {% include "sidebar.twig" %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.twig" %}
+
+{% block body %}
+    {% for blog in blogs %}
+        <article class="blog">
+            <div class="date">
+                <time datetime=" \">{{  blog.created_at | date('l, F j, Y')  }}</time>
+            </div>
+            <header>
+                <h2><a href="/showPost?id={{ blog.id }}">{{ blog.title }}</a></h2>
+            </header>
+            <img src="img/{{ blog.image }}"/>
+            <div class="snippet">
+                <p>{{ blog.blog }}</p>
+                <a href="/showPost?id={{ blog.id }}">Continue reading...</a>
+            </div>
+            <footer class="meta">
+                <p>Comments: <a href="/showPost?id={{ blog.id }}">{{ blog.cantidadComentarios() }}</a></p>
+                <p>Posted by <span class="highlight">{{ blog.author }}</span> at {{ blog.created_at }}</p>
+                <p>Tags: <span class="highlight">{{ blog.tags }}</span></p>
+            </footer>
+        </article>
+    {% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+    {% include "sidebar.twig" %}
+{% endblock %}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
+        {% block styles %}
+            <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
+            <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
+            <link href="css/screen.css" type="text/css" rel="stylesheet" />
+            <link href="css/sidebar.css" type="text/css" rel="stylesheet" />
+            <link rel="shortcut icon" href="img/favicon.ico" />
+        {% endblock %}
+    </head>
+    <body>
+        <section id="wrapper">
+            <header id="header">
+                <div class="top">
+                    {% block nav %}
+                        <nav>
+                            <ul class="navigation">
+                                <li>Bienvenido {{ profile }}</li>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/about">About</a></li>
+                                {% if profile == "invitado" %}
+                                    <li><a href="/login">Login</a></li>
+                                    <li><a href="/register">Register</a></li>
+                                {% else %}
+                                    <li><a href="/contactos">Contactos</a></li>
+                                    <li><a href="/admin">Admin</a></li>
+                                    <li><a href="/logout">Logout</a></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    {% endblock %}
+                </div>
+                <hgroup>
+                    <h2><a href="http://symblog.local/">symblog 2DAW</a></h2>
+                    <h3><a href="http://symblog.locala/">creating a blog in Symfony2</a></h3>
+                </hgroup>
+            </header>   
+            <section class="main-col">
+                {% block body %}
+                {% endblock %}
+            </section>
+            <aside class="sidebar">
+                {% block sidebar %}
+                {% endblock %}
+            </aside>
+            <div id="footer">
+                Symblog hecho por <a href="https://github.com/Feloje20">Jesús Ferrer López</a>
+            </div>
+        </section>
+    </body>
+</html>
