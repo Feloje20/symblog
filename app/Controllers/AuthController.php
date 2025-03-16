@@ -18,7 +18,7 @@ class AuthController extends BaseController
                 $validator->assert($reqMethod->getParsedBody());
                 $user = Usuario::where('email', $reqMethod->getParsedBody()['email'])->first();
                 if ($user && $reqMethod->getParsedBody()['password'] === $user->password) {
-                    $_SESSION['user'] = $user->name; // O el campo que corresponda
+                    $_SESSION['user'] = $user->user; 
                     $_SESSION['perfil'] = 'usuario';
                     header('Location: /');
                     exit();

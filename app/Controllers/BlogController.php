@@ -65,17 +65,20 @@ class BlogController extends BaseController
 
         $comments = $blog->comments;  // Obtener los comentarios del blog
         $profile = $_SESSION['perfil'] ?? '';
+        $user = $_SESSION['user'] ?? '';
 
         return $this->renderHTML('showPost.twig', [
             'blog' => $blog,
             'comments' => $comments,
-            'profile' => $profile
+            'profile' => $profile,
+            'user' => $user
         ]);
     }
 
     // Método de adición de nuevo comentario
     public function addCommentAction($request)
     {
+        // Validación de datos
         $validador = v::key('user', v::stringType()->notEmpty())
             ->key('comment', v::stringType()->notEmpty())
             ->key('blog_id', v::intVal()->positive());

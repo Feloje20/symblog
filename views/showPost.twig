@@ -33,10 +33,14 @@
             <h2 style="text-align:center";>Publica tu comentario</h2>
             <form action="/postComment" method="POST">
                 <input type="hidden" name="blog_id" value="{{ blog.id }}"/>
-                <div class="form-group">
-                    <label for="user">Usuario:</label>
-                    <input type="text" id="user" name="user" required/>
-                </div>
+                {% if user is not empty %}
+                    <input type="hidden" name="user" value="{{ user }}"/>
+                {% else %}
+                    <div class="form-group">
+                        <label for="user">Usuario:</label>
+                        <input type="text" id="user" name="user" required/>
+                    </div>
+                {% endif %}
                 <div class="form-group">
                     <label for="comment">Comentario:</label>
                     <textarea id="comment" name="comment" rows="4" required></textarea>
