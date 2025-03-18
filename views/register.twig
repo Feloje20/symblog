@@ -3,10 +3,11 @@
 {% block nav %}
 <nav>
     <ul class="navigation">
-        <li>Bienvenido {{ profile }}</li>
+        <li>Bienvenido {{ data.profile }}</li>
         <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
     </ul>
 </nav>
 {% endblock %}
@@ -38,7 +39,7 @@
         <div class="error-messages">
             <ul>
                 {% for error in errors %}
-                    <li>{{ error }}</li>
+                    <li>{{ data.error }}</li>
                 {% endfor %}
             </ul>
         </div>

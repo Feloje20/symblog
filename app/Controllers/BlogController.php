@@ -6,6 +6,7 @@ use \Respect\Validation\Validator as v;
 
 class BlogController extends BaseController
 {
+    // Creación de blog
     public function blogsAction($request)
     {
         if ($request->getMethod() == "POST") {
@@ -31,9 +32,11 @@ class BlogController extends BaseController
                     $fileName = uniqid() . $fileName;
                     $image->moveTo("img/$fileName");
                     $blog->image = $fileName;
-                } else { // Si no hay imagen pongo una por defecto
+                } else { 
+                    // Si no hay imagen subida, ponemos una por defecto.
                     $blog->image = "beach.jpg";
                 }
+
                 $blog->save();
                 header("Location: /");
             } catch (\Exception $e) {
@@ -45,6 +48,8 @@ class BlogController extends BaseController
         ];
         return $this->renderHTML("addBlog.twig", $data);
     }
+
+    // Método de visualización de blog
     public function showPostAction($request)
     {
         // Obtener el ID desde la URL (query string)

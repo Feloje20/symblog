@@ -7,8 +7,11 @@ use Respect\Validation\Validator as v;
 
 class UserController extends BaseController
 {
+    // Método para crear al usuario
     public function userAction($request)
     {
+        $profile = $_SESSION['perfil'] ?? '';
+        
         // Verificar si el formulario ha sido enviado por POST
         if ($request->getMethod() == "POST") {
             $validador = v::key('user', v::stringType()->notEmpty())
@@ -41,10 +44,11 @@ class UserController extends BaseController
 
         // Preparar los datos para renderizar la vista
         $data = [
-            "response" => $response ?? "", // Mostrar el mensaje de error o éxito
+            "response" => $response ?? "", 
+            'profile' => $profile
         ];
 
         // Renderizar la vista de registro
-        return $this->renderHTML("register.twig", $data);
+        return $this->renderHTML("register.twig", ['data' => $data]);
     }
 }

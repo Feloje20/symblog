@@ -14,13 +14,7 @@ use Aura\Router\RouterContainer as router;
 use App\Controllers\UserController;
 use App\Controllers\AuthController;
 
-// session_start();
-
-// if (!isset($_SESSION['perfil'])) {
-//     $_SESSION['user'] = 'Invitado';
-//     $_SESSION['perfil'] = "Invitado";
-// }
-
+// Recupera la información de la petición
 $request = \Laminas\Diactoros\ServerRequestFactory::fromGlobals(
     $_SERVER,
     $_GET,
@@ -31,10 +25,9 @@ $request = \Laminas\Diactoros\ServerRequestFactory::fromGlobals(
 
 $router = new Router();
 $rutas = $router->getMap();
-// ******************************* RUTAS PÚBLICAS *********************************
+// ******************************* RUTAS SIN AUTH *********************************
 $rutas->get("Inicio", "/", [IndexController::class, "indexAction"]);
 $rutas->get("Mostrar el sobre la web", "/about", [IndexController::class, "aboutAction"]);
-$rutas->get("Mostrar el contacto de la web", "/contactos", [IndexController::class, "contactAction"]);
 $rutas->get("Mostrar detalles del blog", "/showPost", [BlogController::class, "showPostAction"]);
 $rutas->post("Agregar comentario", "/postComment", [BlogController::class, "addCommentAction"]);
 
@@ -55,9 +48,11 @@ $rutas->get("Cerrar sesión", "/logout", [AuthController::class, "logoutAction",
 $route = $router->getMatcher()->match($request);
 
 if (!$route) {
-    exit(http_response_code(404));
+    // Si no encuentra una ruta, redirigimos al inicio
+    header("location: /");
 }
 
+// Comprobamos si la ruta necesita autentificación
 $handler = $route->handler;
 if (isset($handler['auth'])){
     $needsAuth = $handler['auth'];

@@ -11,6 +11,9 @@ class AuthController extends BaseController
     // Método de login del usuario
     public function loginAction($reqMethod)
     {
+        $profile = $_SESSION['perfil'] ?? '';
+        $data['profile'] = $profile;
+
         if ($reqMethod->getMethod() == 'POST') {
             $validator = v::key('email', v::stringType()->notEmpty())
                 ->key('password', v::stringType()->notEmpty());
@@ -32,11 +35,12 @@ class AuthController extends BaseController
                 $data['error'] = 'Error: ' . $e->getMessage();
             }
         } else {
-            return $this->renderHTML('login.twig');
+            return $this->renderHTML('login.twig', ['data' => $data]);
         }
+        
     
         // Asegúrate de pasar los datos a la vista
-        return $this->renderHTML('login.twig', $data);
+        return $this->renderHTML('login.twig', ['data' => $data]);
     }
     
     // Método de deslogeo

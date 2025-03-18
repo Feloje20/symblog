@@ -3,9 +3,10 @@
 {% block nav %}
 <nav>
     <ul class="navigation">
-        <li>Bienvenido {{ profile }}</li>
+        <li>Bienvenido {{ data.profile }}</li>
         <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>
+        <li><a href="/login">Login</a></li>
         <li><a href="/register">Register</a></li>
     </ul>
 </nav>
@@ -14,9 +15,9 @@
 {% block body %}
     <h1>Iniciar sesión</h1>
     
-    {% if error is not null %}
+    {% if data.error is not null %}
         <div class="blogger-notice" style="background: #FFBABA; color: #D8000C; border-color: #D8000C;">
-            {{ error }}
+            {{ data.error }}
         </div>
     {% endif %}
 

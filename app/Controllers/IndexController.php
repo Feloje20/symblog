@@ -7,6 +7,7 @@ use App\Models\Comment;
 
 class IndexController extends BaseController
 {
+    // Mostrar la vista de index
     public function indexAction()
     {
         $blogs = Blog::with('comments')->orderBy('created_at', 'desc')->get();
@@ -18,6 +19,7 @@ class IndexController extends BaseController
         ]);
     }
     
+    // Mostrar la vista de about
     public function aboutAction()
     {
         $tags = Blog::getAllTags();
@@ -25,13 +27,7 @@ class IndexController extends BaseController
         return $this->renderHTML('about.twig', ['tags' => $tags, 'profile' => $profile]);
     }
 
-    public function contactAction()
-    {
-        $tags = Blog::getAllTags();
-        $profile = $_SESSION['perfil'] ?? '';
-        return $this->renderHTML('contact.twig', ['tags' => $tags, 'profile' => $profile]);
-    }
-
+    // Mostrar la vista de admin
     public function adminAction()
     {
         $tags = Blog::getAllTags();
